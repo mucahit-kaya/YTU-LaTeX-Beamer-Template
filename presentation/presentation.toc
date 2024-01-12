@@ -1,0 +1,6 @@
+\babel@toc {turkish}{}\relax 
+\beamer@sectionintoc {1}{Giriş}{3}{0}{1}
+\beamer@sectionintoc {2}{Einstein Alan Denklemleri}{6}{0}{2}
+\beamer@subsectionintoc {2}{1}{Metrik Tensör}{8}{0}{2}
+\beamer@sectionintoc {3}{Genel Görelilik}{9}{0}{3}
+\beamer@sectionintoc {4}{Depo}{10}{0}{4}

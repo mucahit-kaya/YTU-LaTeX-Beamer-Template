@@ -1,0 +1,278 @@
+\documentclass[aspectratio=169]{beamer}
+% to set aspect ratio to 4:3, use the following line instead:
+% \documentclass{beamer}
+
+\usepackage{amsfonts,amsmath,oldgerm}
+
+
+\usepackage{color}
+\usepackage[turkish]{babel}
+\usepackage{pgf,graphicx}
+\usepackage{enumerate}
+
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{paralist}
+\usepackage{xcolor}
+
+
+\usepackage{tikz}
+\usepackage{geometry}
+\usepackage{svg}
+
+\usefonttheme[onlymath]{serif}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% Beamer Theme Settings %%%%%
+%------------------------------------------------------------
+
+%------------------------------------------------------------
+%% Color
+
+\definecolor{maincolor}{RGB/cmyk}{0,51,102/100,50,0,60}
+
+% "Warm grey"
+\definecolor{sintefgrey}{RGB/cmyk}{224,224,224/0,0,0,12}
+\colorlet{sintefgray}{sintefgrey}
+
+% Greens
+\definecolorset{RGB/cmyk}{sintef}{}{lightgreen, 205,250,225/.23, 0,.20, 0;%
+                                    green,       20,185,120/.73, 0,.67, 0;%
+                                    darkgreen,    0, 70, 40/.93,.43,.92,.52}
+
+% Additional colours
+\definecolorset{RGB/cmyk}{sintef}{}{yellow, 200,155,20/20, 36,98, 8;%
+                                    red,    190, 60,55/19, 86,77, 8;%
+                                    lilla,  120,  0,80/48,100,27,31}
+
+% Deprecated colours for backward compatibility
+\definecolorset{HTML}{sintef}{}{cyan,      22A7E5;%
+                                magenta,   EC008C;%
+                                lightgrey, D8D0C7}
+\colorlet{sinteflightgray}{sinteflightgrey}
+
+\definecolor{ytublue}{RGB}{32,56,100}
+
+
+
+\setbeamercolor{title}{fg=ytublue}
+\setbeamercolor{subtitle}{fg=ytublue}
+\setbeamercolor{abstract title}{fg=ytublue}
+\setbeamercolor{section in toc}{fg=ytublue}
+
+%------------------------------------------------------------
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Frame Settings
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pgfdeclareimage[width=0.09\paperwidth]{ytulogo}{images/ytulogo}
+
+
+% Put the logo in each slide's top left area
+\setbeamertemplate{headline}{\hspace{0.06\textwidth}\pgfuseimage{ytulogo}}
+
+\setbeamerfont{framefont}{size=\Large}
+\setbeamerfont{sectionfont}{size=\small}
+\setbeamercolor{frametitle}{fg=ytublue}
+
+% Define frame title and subtitle layout
+\setbeamertemplate{frametitle}{%
+  \vspace*{-4.25ex}
+  \begin{beamercolorbox}[leftskip=2cm]{frametitle}%
+    \usebeamerfont{framefont}\insertframetitle\\
+    \usebeamerfont{sectionfont}\insertsectionnumber \hspace*{1.5ex}\insertsection \\
+    % \usebeamerfont{framesubtitle}\insertframesubtitle
+  \end{beamercolorbox}
+}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%---------------Title---------------------------------------
+\title{Mathematical Background of Einstein's Field Equations}
+%\subtitle{Using \LaTeX\ to prepare slides}
+\institute{Yıldız Teknik Üniversitesi Fizik Bölümü}
+\date{2023}
+\author[kaya-m]{Mücahit Kaya \\ \texttt{mucahit.kaya@std.yildiz.edu.tr}}
+
+\subtitle{Graduation Presentation}
+\titlegraphic{\includegraphics{images/logo-wide.pdf}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+\begin{document}
+
+\begin{frame}
+    \titlepage
+    Tez Danışmanı: Prof. Dr. Devrim Yazıcı
+\end{frame}
+
+
+\begin{frame}
+    \begin{abstract}
+        İnsanoğlunun doğayı ve doğadaki olguları açıklama serüveni, insanlık tarihi kadar eski bir geçmişe sahiptir. Bu serüvenin en önemli kilometre taşlarından biri, Isaac Newton'un 1687 yılında yayınlamış olduğu \textit{Philosophiæ Naturalis Principia Mathematica (Doğa Felsefesinin Matematiksel İlkeleri)} ile birlikte yerçekimini ve cisimlerin hareketini bilimsel metedolojiye dayanarak matematik formülleri ile açıkla-yabilmesi olmuştur.         İnsanoğlunun doğayı ve doğadaki olguları açıklama serüveni, insanlık tarihi kadar eski bir geçmişe sahiptir. Bu serüvenin en önemli kilometre taşlarından biri, Isaac Newton'un 1687 yılında yayınlamış olduğu \textit{Philosophiæ Naturalis Principia Mathematica (Doğa Felsefesinin Matematiksel İlkeleri)} ile birlikte yerçekimini ve cisimlerin hareketini bilimsel metedolojiye dayanarak matematik formülleri ile açıkla-yabilmesi olmuştur. 
+    \end{abstract}
+\end{frame}
+
+
+
+\section{Giriş}
+     
+    \begin{frame}{İçindekiler}
+        \tableofcontents[currentsection]
+    \end{frame}
+
+
+    \begin{frame}
+        \frametitle{Giriş}       
+        İnsanoğlunun doğayı ve doğadaki olguları açıklama serüveni, insanlık tarihi kadar eski bir geçmişe sahiptir. Bu serüvenin en önemli kilometre taşlarından biri, Isaac Newton'un 1687 yılında yayınlamış olduğu \textit{Philosophiæ Naturalis Principia Mathematica (Doğa Felsefesinin Matematiksel İlkeleri)} ile birlikte yerçekimini ve cisimlerin hareketini bilimsel metedolojiye dayanarak matematik formülleri ile açıkla-yabilmesi olmuştur. 
+    \end{frame}
+
+    \begin{frame}
+    \frametitle{Giriş}
+        
+        \begin{equation}
+        \label{eq:1}
+        F_{\text(grav)} = G \frac{m_1 m_2}{r^2}
+        \end{equation}
+        
+        Kütle Çekim Yasası\ref{eq:1} olarak bilinen ve iki cismin kütleleri sebebiyle birbirlerine uyguladıkları çekim kuvvetini açıklayan bu yasa, kütlesi az olan cisimler için gözlemlenebilir olmasa da gezegenler gibi makroskopik cisimlerin uzaydaki hareketini açıklayabilmekte ve gözlemler ile kendini iki yüzyıla aşkın bir süredir doğrulamaktaydı. Fakat her ne kadar Newton'un Kütle Çekim Yasası matematiksel olarak oldukça sade bir yapıda olsa da, 19. yüzyılın sonlarında yapılan gözlemler sayesinde kusurlarının olduğu akıllarda yer edinmeye başlamıştır. Merkür gezegenin günberi noktasında sergilemiş olduğu yalpalama hareketi, iki cismin kütleleri sebebiyle neden birbirlerini karşı kuvvet uyguladıkları gibi soruları cevaplamakta yetersiz kalan Kütle Çekim yasası, dönemin fizikçilerini yeni bir teori arayışına itmiştir.
+    \end{frame}
+
+\section{Einstein Alan Denklemleri}
+    \begin{frame}{İçindekiler}      
+        \tableofcontents[currentsection]
+
+    \end{frame}
+    \begin{frame}
+        \frametitle{Alan Denklemlerine Giriş}
+        \begin{equation}
+            \label{eq:2}
+            R_{\mu\nu} - \frac{1}{2}Rg_{\mu\nu} + \Lambda g_{\mu\nu} = \frac{8\pi G}{c^4}T_{\mu\nu}
+        \end{equation}
+        1915 yılında yayınlanan Einstein Alan Denklemeri (EFE)\ref{eq:2}, Newton'un çekim yasasının aksine, cisimlerin hareketini bir kuvvet etki etkisi nedenyle olmadığını, 3 boyulu öklidyen uzayın aslında zaman boyutu ile birlikte ele alınması gerektiğini öne sürmüş ve uzay-zaman olarak evreni açıklamıştır. Cisimlerin bulunduğu uzay her yerde izotropik özellikte olmayıp, cisimlerin sahip olduğu kütleleri tarafından uzayın bükülmesi sonucu bu eğrilikler üzerinde hareket etmeleri ile açıklanmaktadır.\cite{Hartle2021} Daha yalın bir şekilde ile kim tarafından ifade edildiği tam olarak bilinemese de bu ünlü benzetme ile açıklanılabilir;
+        \begin{quote}
+            Madde uzay-zamana nasıl büküleceğini söylüyor, uzay-zaman da maddeye nasıl hareket etmesi gerektiğini.
+        \end{quote}
+        
+    \end{frame}
+
+
+
+    \subsection{Metrik Tensör}
+    \begin{frame}
+        \frametitle{Metrik Tensör}
+        
+        Sonsuz küçüklükteki yer değiştirme vektörü \(\vec{dl}\) şu şekide üç boyutlu uzay için tanımlanabilir: 
+        \begin{equation*}
+            \vec{dl} = dx\hat{i} + dy\hat{j} + dz\hat{k}
+        \end{equation*}
+        
+    \end{frame}
+
+
+
+\section{Genel Görelilik}
+
+\begin{frame}
+    \frametitle{Sample frame title}
+    
+    This is some text in the first frame. This is some text in the first frame. This is some text in the first frame.
+
+\end{frame}
+
+
+
+
+\section{Depo}
+\begin{frame}
+    \frametitle{Sample frame title}
+    
+    This is some text in the first frame. This is some text in the first frame. This is some text in the first frame.
+\end{frame}
+
+\begin{frame}
+    \frametitle{There Is No Largest Prime Number}
+    \framesubtitle{The proof uses \textit{reductio ad absurdum}.}
+    \begin{theorem}
+    There is no largest prime number.
+    \end{theorem}
+    \begin{proof}
+    \begin{enumerate}
+    \item<1-> Suppose $p$ were the largest prime number.
+    \item<2-> Let $q$ be the product of the first $p$ numbers.
+    \item<3-> Then $q + 1$ is not divisible by any of them.
+    \item<1-> But $q + 1$ is greater than $1$, thus divisible by some prime
+    number not in the first $p$ numbers.\qedhere
+    \end{enumerate}
+    \end{proof}
+    \uncover<4->{The proof used \textit{reductio ad absurdum}.}
+    \begin{block}{Open Questions}
+        Is every even number the sum of two primes?
+        \cite{Goldbach1742}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{What’s Still To Do?}
+    \begin{block}{Answered Questions}
+    How many primes are there?
+    \end{block}
+    \begin{block}{Open Questions}
+    Is every even number the sum of two primes?
+    \end{block}
+\end{frame}
+
+\begin{frame}[t]
+    \frametitle{What Are Prime Numbers?}
+    \begin{definition}
+    A \alert{prime number} is a number that has exactly two divisors.
+    \end{definition}
+    \begin{example}
+    \begin{itemize}
+    \item 2 is prime (two divisors: 1 and 2).
+    \item 3 is prime (two divisors: 1 and 3).
+    \item 4 is not prime (\alert{three} divisors: 1, 2, and 4).
+    \end{itemize}
+    \end{example}
+\end{frame}
+
+\begin{thebibliography}{10}
+    \bibitem{Goldbach1742}[Goldbach, 1742]
+    Christian Goldbach.
+    \newblock A problem we should try to solve before the ISPN ’43 deadline,
+    \newblock \emph{Letter to Leonhard Euler}, 1742.
+\end{thebibliography}
+
+    \begin{frame}[fragile]
+        \frametitle{An Algorithm For Finding Prime Numbers.}
+        \begin{verbatim}
+        int main (void)
+        {
+        std::vector<bool> is_prime (100, true);
+        for (int i = 2; i < 100; i++)
+        if (is_prime[i])
+        {
+        std::cout << i << " ";
+        for (int j = i; j < 100; is_prime [j] = false, j+=i);
+        }
+        return 0;
+        }
+        \end{verbatim}
+        \begin{uncoverenv}<2>
+        Note the use of \verb|std::|.
+        \end{uncoverenv}
+        
+    
+\end{frame}
+
+
+
+\end{document}
